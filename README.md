@@ -1,26 +1,39 @@
-# COE_Group3 Abaqus-Nanoindentation-Project
-## Welcome to the Abaqus Nanoindentation Project. This README.md file contains information on how one can start running multiple Abaqus test runs simultaneously. 
+# Machine Learning for Crystal Plasticity Parameter Calibration
+
 Author: Youngbin Pyo, Irem Kurt
 
-### The following project can be done using two different approaches. The first option is implementing a loss function and ML algorithm to predict several points on the force-displacement curve explained in Stage 3-1. The second approach is to use iterative calibration using a direct regression model shown in Stage 3-2.
+## Project Overview
+Automated calibration of Crystal Plasticity Finite Element Method (CPFEM) parameters using machine learning to replace manual curve-fitting. Integrates nanoindentation data, simulations, and ML to predict:
+- Initial resolved shear stress (τ₀)
+- Hardening exponent (a)
+- Hardening rate (h₀) 
+- Critical shear stress (τ_cs)
 
-![image](https://github.com/user-attachments/assets/a7f3f967-92ec-4c79-a69f-667f7cc583ec)
+## Key ML Contributions
+- Developed an automated ML pipeline for CPFEM parameter calibration, reducing manual effort and improving reproducibility.
+- Trained and evaluated multiple ML models (ANN, LSTM, CNN, Random Forest) to identify the best-performing approach for force-displacement (FD) curve prediction.
+- Implemented feature engineering and data preprocessing to enhance model performance, including normalization, outlier removal, and percentile-based feature extraction.
+- Achieved high accuracy with Artificial Neural Networks (ANNs), yielding an R² score of up to 0.995 and low RMSE (2.228e-05) for material-specific predictions.
+- Designed an iterative optimization workflow to refine parameters and align simulated FD curves with experimental data.
 
-![image](https://github.com/user-attachments/assets/71135a75-8508-4238-8b34-a071bf8e21ea)
+## My Role (ML Lead)
+As the primary contributor to the ML component of this project, I was responsible for:
+- Designing the ML pipeline: From data preprocessing to model deployment.
+- Developing and training ANN models: Achieved state-of-the-art accuracy for CPFEM parameter prediction.
+- Iterative optimization: Implemented a feedback loop to refine parameters using percentile-based error metrics.
+- Cross-disciplinary collaboration: Worked with material scientists to validate ML outputs against experimental data.
 
+## Model Performance
+| Material          | RMSE       | R² Score | Best Model |
+|-------------------|------------|----------|------------|
+| DP1000            | 1.331e-05  | 0.975    | ANN        |
+| QP1200 (Ferrite)  | 3.128e-05  | 0.983    | ANN        |
+| QP1200 (Martensite)| 2.228e-05 | 0.995    | ANN        |
 
-### The current files are set for experiments onto DP1000 grains 1441, 2744, and 3198 (please update this if you use a new material).
-- The configurations for the simulation can be changed in configs/global_config.xlsx
-* The parameters can be found in the paramInfo directory
-+ The parameter settings and FD curve data points can be found in files inside the results folder
-- The simulation directory contains templates and additional generated files for all the simulations that have been executed
-* The targets directory contains data points on the aimed target curve
-+ The template directory contains file sets needed for each independent simulation
-
-All simulations can be run using the pipeline.py file.
-```
-python3 pipeline.py
-```
+## Future Improvements
+- Expand datasets: Incorporate more materials and microstructural variants.
+- Enhance feature engineering: Add strain-rate sensitivity and unloading slope metrics.
+- Deploy lightweight models: Optimize ANNs for real-time industrial applications.
 
 # Acknowledgments
 Special acknowledgments to Rongfei Juan for her invaluable support throughout the entire process. Her continuous feedback, guidance, and provision of essential simulation templates have significantly contributed to the success of this project. We extend our sincere gratitude for their collaborative spirit and assistance.
